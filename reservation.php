@@ -17,6 +17,7 @@ class Init {
             'snapshotWeekOffset' => 0
         ];
         $res = $this->curlPost($this->host, $data, $this->token);
+        var_dump($res);
     }
 
     protected function curlPost(string $url, array $data = array(), string $token)
@@ -24,7 +25,7 @@ class Init {
         $data = http_build_query($data);
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Content-Type: application/json;charset=UTF-8',
+            'Content-Type: application/json',
             'Authorization : Bearer '.$token
         ));
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -35,6 +36,7 @@ class Init {
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         $output = curl_exec($ch);
+        var_dump($output);exit;
         curl_close($ch);
         return $output;
     }
